@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Senha</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="../pagina-1/index.html">Inicio</a>
+        <a href="../morse/codmorse.html">Codificar Morse</a>
+        <a href="../calculadora-juros/index.html">Calcular Juros</a>
+        <a href="../calcular-peri-area/index.html">Medição de Área</a>
+        <a href="../conversor-medidas/index.html">Coverter Medidas</a>
+        <a href="../gerador-lorem/index.html">Gerar Lorem</a>
+    </div>
+
+
+    <h1>Gerador de Senha</h1>
+    <div class="div-cont">
+    <label for="tamanhoSenha" class="label-tam-senha">Tamanho da Senha:</label>
+    <input type="number" id="tamanhoSenha" min="4" value="12" class="inp-tam-senha">
+    <button onclick="gerarSenha()" class="btn-gerar">Gerar Senha</button>
+    <div class="container">
+    <button id="copiarButton" onclick="copiarSenha()" style="display: none;" class="btn-copiar">Copiar</button>
+    <p id="senhaGerada" class="senhaGerada"></p>
+    </div>
+    </div>
+
+    <script>
+        function gerarSenha() {
+            const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+            const tamanhoSenha = parseInt(document.getElementById('tamanhoSenha').value);
+
+            if (tamanhoSenha < 4) {
+                alert('Tamanho mínimo da senha é 4 caracteres.');
+                return;
+            }
+
+            let senha = '';
+            for (let i = 0; i < tamanhoSenha; i++) {
+                const randomIndex = Math.floor(Math.random() * caracteres.length);
+                senha += caracteres[randomIndex];
+            }
+
+            document.getElementById('senhaGerada').textContent = senha;
+            document.getElementById('copiarButton').style.display = 'block'; // Mostrar o botão de cópia
+        }
+
+        function copiarSenha() {
+            const senha = document.getElementById('senhaGerada').textContent;
+            const input = document.createElement('textarea');
+            input.value = senha;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            alert('Senha copiada para a área de transferência.');
+        }
+    </script>
+</body>
+</html>
+<!--CREAT BY BOMBADOMAROMBA22-->
